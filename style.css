@@ -1,0 +1,248 @@
+:root {
+  color-scheme: dark;
+  --accent: #c4a1ec;
+  --red: #ca4754;
+  --dark-red: #863038;
+  --black: #222;
+  --dark-gray: #303030;
+  --gray: #999;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Menlo, monospace;
+}
+
+html {
+  background-color: var(--black);
+  height: 100dvh;
+}
+
+header {
+  h1 {
+    color: white;
+    b {
+      font-weight: bolder;
+      color: var(--accent);
+    }
+  }
+  height: 50px;
+  color: #999;
+  display: flex;
+  padding: 30px;
+  gap: 20px;
+  align-items: center;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 15%;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+main:focus {
+  background-color: red;
+}
+
+#standby-dialog {
+  border: none;
+  margin: auto;
+  font-family: "Courier New", Courier, monospace;
+  user-select: none;
+  background-color: transparent;
+  color: var(--accent);
+  font-size: 30px;
+  outline: none;
+  transition: all 200ms ease-in allow-discrete;
+
+  &[open]::backdrop {
+    opacity: 0.3;
+  }
+}
+
+::backdrop {
+  background-color: black;
+  opacity: 0;
+  transition: opacity 200ms ease-in;
+
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+section {
+  align-self: center;
+  justify-content: center;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#results {
+  margin: 0 auto;
+  align-self: center;
+  justify-content: center;
+  justify-items: center;
+  background-color: var(--dark-gray);
+  border: none;
+  outline: none;
+  flex-direction: column;
+  gap: 100px;
+  padding: 40px;
+  gap: 40px;
+  opacity: 0;
+  translate: 0 5vh;
+  transition: all 500ms allow-discrete;
+
+  h2,
+  h4 {
+    color: var(--gray);
+  }
+
+  section {
+    display: flex;
+    gap: 70px;
+
+    h3,
+    h5 {
+      color: var(--accent);
+    }
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    article {
+      justify-content: center;
+      align-content: center;
+      max-width: 700px;
+      display: flex;
+      flex-flow: column;
+      gap: 5px;
+    }
+
+    h3,
+    h5 {
+      color: var(--accent);
+    }
+  }
+
+  button {
+    margin: auto;
+    cursor: pointer;
+    border-radius: 10px;
+    outline: none;
+    height: 45px;
+    aspect-ratio: 1;
+    background-color: var(--black);
+    border: none;
+
+    i {
+      pointer-events: none;
+    }
+
+    &:hover {
+      background-color: var(--dark-gray);
+      transition: ease-in 200ms;
+    }
+  }
+
+  &::backdrop {
+    opacity: 0.3;
+  }
+
+  &[open] {
+    display: flex;
+    opacity: 1;
+    translate: 0 0;
+
+    @starting-style {
+      translate: 0 -5vh;
+      opacity: 0;
+    }
+
+    &::backdrop {
+      opacity: 0.5;
+      transition: all 500ms allow-discrete;
+
+      @starting-style {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+time,
+i {
+  color: var(--accent);
+}
+
+p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px 8px;
+  margin: 0;
+}
+
+x-word {
+  border-bottom: 2px solid transparent;
+
+  &.incorrect {
+    border-bottom-color: var(--red);
+  }
+}
+
+x-letter {
+  color: var(--gray);
+  position: relative;
+  font-size: 1rem;
+
+  &.active::before {
+    content: "";
+    height: 90%;
+    width: 2px;
+    background-color: var(--accent);
+    color: var(--accent);
+    position: absolute;
+    left: -15%;
+    animation: 1.3s blink infinite ease-in-out;
+  }
+
+  &.active.is-last::before {
+    position: absolute;
+    left: 115%;
+  }
+
+  &.extra {
+    color: var(--dark-red);
+  }
+
+  &.correct {
+    color: white;
+  }
+
+  &.incorrect {
+    color: var(--red);
+  }
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 0;
+  }
+}
